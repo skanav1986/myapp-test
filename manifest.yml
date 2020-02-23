@@ -1,0 +1,7 @@
+---
+applications:
+- name: myapp-test
+  instances: 1
+  memory: 1000M
+  random-route: true
+  path: target/myapp-test-0.0.1-SNAPSHOT.jar
