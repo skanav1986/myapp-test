@@ -24,12 +24,12 @@ run:
       WORKING_DIR=$(pwd)
       REPO_NAME=repo
 
-      REPO_DIR="${WORKING_DIR}/${REPO_NAME}"
-      #VERSION_DIR="${WORKING_DIR}/version"
+      #REPO_DIR="${WORKING_DIR}/${REPO_NAME}"
+      VERSION_DIR="${WORKING_DIR}/${REPO_NAME}"
       #VERSION=$(cat "${VERSION_DIR}/version")
 
-      VERSION_DIR="${REPO_DIR}/task"
-      VERSION=$(cat "${VERSION_DIR}/version")
+      #VERSION_DIR="${REPO_DIR}/task"
+      version=$(cat "${VERSION_DIR}/task/version")
 
       # INFO: This directory will be passed as an output, into the next task
       OUTPUT_DIR="${WORKING_DIR}/workspace"
