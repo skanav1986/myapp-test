@@ -17,7 +17,7 @@ outputs:
 run:
   path: bash
   args:
-    - -eux
+    - -exc
     - |
       echo "Job Starting"
 
