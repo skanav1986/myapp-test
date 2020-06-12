@@ -9,8 +9,9 @@ inputs:
 #  - name: resource-tutorial
   - name: mytest-app
   - name: resource-app
-    path: gopath/src/github.com/cloudfoundry-community/simple-go-web-app
+#    path: gopath/src/github.com/cloudfoundry-community/simple-go-web-app
+    path: mytest-app/task/simple-go-web-app
 
 run:
-  path: myapp-test/task/dbha_mytest_app.sh
+  path: mytest-app/task/dbha_mytest_app.sh
 
