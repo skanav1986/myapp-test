@@ -1,0 +1,36 @@
+# first_task.yml
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: ubuntu
+    tag: latest
+
+inputs:
+  - name: repo
+  - name: version
+
+outputs:
+  - name: workspace
+
+run:
+  path: sh
+  args:
+    - -eux
+    - |
+      WORKING_DIR=$(pwd)
+      REPO_NAME=repo
+      REPO_DIR="${WORKING_DIR}/${REPO_NAME}"
+
+      #VERSION_DIR="${WORKING_DIR}/version"
+      #VERSION=$(cat "${VERSION_DIR}/version")
+
+      # INFO: This directory will be passed as an output, into the next task
+      OUTPUT_DIR="${WORKING_DIR}/workspace"
+      # INFO: Copy **contents of** incoming repo into output; do all work there
+      cp -R "${REPO_DIR}/." "${OUTPUT_DIR}/"
+      # NOTE: Move to OUTPUT directory
+      cd "${OUTPUT_DIR}"
+      # INFO: Do some work in this task
+      # ... did some work ...
