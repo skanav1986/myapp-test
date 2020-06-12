@@ -28,13 +28,13 @@ run:
       #VERSION_DIR="${WORKING_DIR}/version"
       #VERSION=$(cat "${VERSION_DIR}/version")
 
-      VERSION_DIR="${WORKING_DIR}/version"
+      VERSION_DIR="${REPO_DIR}/task"
       VERSION=$(cat "${VERSION_DIR}/version")
 
       # INFO: This directory will be passed as an output, into the next task
       OUTPUT_DIR="${WORKING_DIR}/workspace"
       # INFO: Copy **contents of** incoming repo into output; do all work there
-      cp -R "${REPO_DIR}/." "${OUTPUT_DIR}/"
+      cp -R "${VERSION_DIR}/." "${OUTPUT_DIR}/"
       # NOTE: Move to OUTPUT directory
       cd "${OUTPUT_DIR}"
       # INFO: Do some work in this task
