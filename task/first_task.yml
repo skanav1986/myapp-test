@@ -15,10 +15,12 @@ outputs:
   - name: workspace
 
 run:
-  path: sh
+  path: bash
   args:
     - -eux
     - |
+      echo "Job Starting"
+
       WORKING_DIR=$(pwd)
       REPO_NAME=repo
 
