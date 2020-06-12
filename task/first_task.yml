@@ -24,11 +24,6 @@ run:
       WORKING_DIR=$(pwd)
       REPO_NAME=repo
 
-      mkdir -p $WORKING_DIR/version
-      cat << EOF > $WORKING_DIR/version/version
-      1.1.1
-      EOF
-
       REPO_DIR="${WORKING_DIR}/${REPO_NAME}"
       #VERSION_DIR="${WORKING_DIR}/version"
       #VERSION=$(cat "${VERSION_DIR}/version")
