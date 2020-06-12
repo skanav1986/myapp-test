@@ -21,8 +21,8 @@ run:
     - |
       echo "Job Starting"
 
-      #WORKING_DIR=$(pwd)
-      #REPO_NAME=repo
+#      #WORKING_DIR=$(pwd)
+#      #REPO_NAME=repo
 #
       ##REPO_DIR="${WORKING_DIR}/${REPO_NAME}"
       #VERSION_DIR="${WORKING_DIR}/${REPO_NAME}"
