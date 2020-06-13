@@ -6,11 +6,14 @@ image_resource:
   source:
     repository: busybox
 
+inputs:
+  - name: vars
+
 params:
   PARAMS_FILE: params.yml
 
 run:
-  path: bash
+  path: sh
   args:
     - -exc
     - |
