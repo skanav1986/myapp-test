@@ -28,7 +28,7 @@ run:
       #VERSION_DIR="${WORKING_DIR}/${REPO_NAME}"
       #VERSION=$(cat "${VERSION_DIR}/version")
 
-      VERSION_DIR="${REPO_DIR}/task"
+      VERSION_DIR="${REPO_DIR}"
       echo "2.2.2" >> $VERSION_DIR/version
       version=$(cat "${VERSION_DIR}/version")
 
