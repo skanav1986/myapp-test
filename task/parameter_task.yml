@@ -10,7 +10,7 @@ params:
   PARAMS_FILE: params.yml
 
 run:
-  path: env
+  path: bash
   args:
     - -exc
     - |
