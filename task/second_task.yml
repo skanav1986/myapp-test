@@ -8,7 +8,7 @@ image_resource:
     tag: latest
 
 inputs:
-  - name: repo1
+  - name: repo
 #  - name: version
 
 outputs:
@@ -22,7 +22,7 @@ run:
       echo "Job Starting"
 
       WORKING_DIR=$(pwd)
-      REPO_NAME=repo1
+      REPO_NAME=repo
 
       REPO_DIR="${WORKING_DIR}/${REPO_NAME}"
       #VERSION_DIR="${WORKING_DIR}/${REPO_NAME}"
