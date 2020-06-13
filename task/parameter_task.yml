@@ -9,8 +9,12 @@ image_resource:
 inputs:
   - name: vars
 
+#params:
+#  PARAMS_FILE: params.yml
+
 params:
-  PARAMS_FILE: params.yml
+  CAT_NAME:
+  DOG_NAME:
 
 run:
   path: sh
@@ -20,3 +24,4 @@ run:
       echo "Job Starting"
       echo ${CAT_NAME}
       echo ${DOG_NAME}
+      sleep 100
