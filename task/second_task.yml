@@ -41,4 +41,4 @@ run:
       # INFO: Do some work in this task
       # ... did some work ...
 
-      sleep 100
+      sleep 10

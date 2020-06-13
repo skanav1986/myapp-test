@@ -39,3 +39,5 @@ run:
       cd "${OUTPUT_DIR}"
       # INFO: Do some work in this task
       # ... did some work ...
+
+      sleep 10
