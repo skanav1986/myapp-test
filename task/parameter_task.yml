@@ -1,0 +1,19 @@
+# second-task.yml
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: busybox
+
+params:
+  PARAMS_FILE: params.yml
+
+run:
+  path: env
+  args:
+    - -exc
+    - |
+      echo "Job Starting"
+      echo ${CAT_NAME}
+      echo ${DOG_NAME}
