@@ -1,0 +1,4 @@
+az-configuration:
+  - name: az1
+    clusters:
+      - cluster: Cluster
