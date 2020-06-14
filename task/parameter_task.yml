@@ -20,8 +20,10 @@ run:
   args:
     - -exc
     - |
+      env
+      df -h
+      ls -lrt vars/
       echo "Job Starting"
       echo ${CAT_NAME}
       echo ${DOG_NAME}
       cat ${PARAMS_FILE}
-      sleep 100
