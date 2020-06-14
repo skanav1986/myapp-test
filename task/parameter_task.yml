@@ -1,4 +1,4 @@
-# second-task.yml
+# parameter_task.yml
 ---
 platform: linux
 image_resource:
