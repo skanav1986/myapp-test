@@ -13,7 +13,8 @@ params:
   PARAMS_FILE: params.yml
   CAT_NAME: 'CAT_HELLO'
   DOG_NAME: 'DOG_HELLO'
-
+  CONFIG_FILE:
+  PARAMS_PATH:
 
 run:
   path: sh
