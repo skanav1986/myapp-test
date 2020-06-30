@@ -1,4 +1,5 @@
 
+
 JENKINS_HOME="/var/jenkins_home/workspace"
 
 pipeline {
