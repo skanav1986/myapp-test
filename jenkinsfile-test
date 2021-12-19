@@ -1,29 +1,17 @@
-
-JENKINS_HOME="/var/jenkins_home/workspace"
 def label = "mypod-${UUID.randomUUID().toString()}"
 
-//파라미터 지정
-properties ([
-	parameters ([
-		string(name: 'MAVEN_BUILD', defaultValue: 'True', description: 'MAVEN 빌드 여부 True/False', trim: true)
-	])
-])
-
-
-podTemplate(label: label,
-    containers: [
-		containerTemplate(name: 'maven', image: 'maven:3.5.2-jdk-8-alpine', ttyEnabled: true, command: 'cat')
-	])
-{
+podTemplate(label: label, containers: [
+    containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat')
+  ]) {
 
     node(label) {
-
-        date = new Date().format('yyyy-MM-dd')
-
-        stage ('checkout') {
-                git branch: "${BRANCH_NAME}", credentialsId: "${GIT_ID}", url: "${GIT_URL}"
+        stage('Get a Maven project') {
+            git 'https://github.com/jenkinsci/kubernetes-plugin.git'
+            container('maven') {
+                stage('Build a Maven project') {
+                    sh 'mvn -B clean install'
+                }
+            }
         }
     }
 }
-
-
