@@ -10,18 +10,9 @@ properties ([
 ])
 
 
-podTemplate(label:label_dev, nodeSelector: 'kubernetes.io/hostname=10.178.50.98',
-	// ..... Agent Pod .. ..
+podTemplate(label:label_dev,
 	containers: [
 		containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-7-alpine', ttyEnabled: true, command: 'cat')
-	],
-
-	volumes: [
-		// Need to docker in docker.
-		hostPathVolume(mountPath: '/etc/localtime', hostPath: '/usr/share/zoneinfo/Asia/Seoul'),
-        hostPathVolume(mountPath: '/etc/timezone', hostPath: '/usr/share/zoneinfo/Asia/Seoul'),
-//        hostPathVolume(mountPath: '/usr/bin/docker', hostPath: '/usr/bin/docker'),
-//        hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
 	])
 
 node(label_dev) {
