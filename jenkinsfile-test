@@ -1,0 +1,50 @@
+
+JENKINS_HOME="/var/jenkins_home/workspace"
+def label_dev = "jenkins-test-${UUID.randomUUID().toString()}"
+
+//파라미터 지정
+properties ([
+	parameters ([
+		string(name: 'MAVEN_BUILD', defaultValue: 'True', description: 'MAVEN 빌드 여부 True/False', trim: true),
+	])
+])
+
+
+podTemplate(label:label_dev, nodeSelector: 'kubernetes.io/hostname=10.178.50.98',
+	// ..... Agent Pod .. ..
+	containers: [
+		containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-7-alpine', ttyEnabled: true, command: 'cat')
+	],
+
+	volumes: [
+		// Need to docker in docker.
+		hostPathVolume(mountPath: '/etc/localtime', hostPath: '/usr/share/zoneinfo/Asia/Seoul'),
+        hostPathVolume(mountPath: '/etc/timezone', hostPath: '/usr/share/zoneinfo/Asia/Seoul'),
+//        hostPathVolume(mountPath: '/usr/bin/docker', hostPath: '/usr/bin/docker'),
+//        hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
+	])
+
+node(label_dev) {
+
+    date = new Date().format('yyyy-MM-dd')
+
+    stage ('checkout') {
+            git branch: "${BRANCH_NAME}", credentialsId: "${GIT_ID}", url: "${GIT_URL}"
+    }
+
+    stage('<DEV> Build') {
+        container('maven') {
+
+          if (MAVEN_BUILD == 'True') {
+              configFileProvider([configFile(fileId: 'maven-accu-repo', variable: 'MAVEN_SETTINGS')]) {
+//                      sh "mvn clean package -Dmaven.test.skip=true"
+                  sh "mvn clean package -Dmaven.test.skip=true"
+              }
+          } else {
+            echo 'No Maven Build'
+          }
+        }
+    }
+}
+
+
