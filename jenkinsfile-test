@@ -5,7 +5,7 @@ def label = "mypod-${UUID.randomUUID().toString()}"
 //파라미터 지정
 properties ([
 	parameters ([
-		string(name: 'MAVEN_BUILD', defaultValue: 'True', description: 'MAVEN 빌드 여부 True/False', trim: true),
+		string(name: 'MAVEN_BUILD', defaultValue: 'True', description: 'MAVEN 빌드 여부 True/False', trim: true)
 	])
 ])
 
