@@ -1,6 +1,6 @@
 
 JENKINS_HOME="/var/jenkins_home/workspace"
-def label_test = "jenkins-test-${UUID.randomUUID().toString()}"
+def label = "mypod-${UUID.randomUUID().toString()}"
 
 //파라미터 지정
 properties ([
@@ -10,11 +10,11 @@ properties ([
 ])
 
 
-podTemplate(label: label_test, containers: [
+podTemplate(label: label, containers: [
 		containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-7-alpine', ttyEnabled: true, command: 'cat')
 	]) {
 
-    node(label_test) {
+    node(label) {
 
         date = new Date().format('yyyy-MM-dd')
 
