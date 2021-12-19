@@ -10,30 +10,30 @@ properties ([
 ])
 
 
-podTemplate(label:label_dev,
-	containers: [
+podTemplate(label: label_test, containers: [
 		containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-7-alpine', ttyEnabled: true, command: 'cat')
-	])
+	]) {
 
-node(label_dev) {
+    node(label_test) {
 
-    date = new Date().format('yyyy-MM-dd')
+        date = new Date().format('yyyy-MM-dd')
 
-    stage ('checkout') {
-            git branch: "${BRANCH_NAME}", credentialsId: "${GIT_ID}", url: "${GIT_URL}"
-    }
+        stage ('checkout') {
+                git branch: "${BRANCH_NAME}", credentialsId: "${GIT_ID}", url: "${GIT_URL}"
+        }
 
-    stage('<DEV> Build') {
-        container('maven') {
+        stage('<DEV> Build') {
+            container('maven') {
 
-          if (MAVEN_BUILD == 'True') {
-              configFileProvider([configFile(fileId: 'maven-accu-repo', variable: 'MAVEN_SETTINGS')]) {
-//                      sh "mvn clean package -Dmaven.test.skip=true"
-                  sh "mvn clean package -Dmaven.test.skip=true"
+              if (MAVEN_BUILD == 'True') {
+                  configFileProvider([configFile(fileId: 'maven-accu-repo', variable: 'MAVEN_SETTINGS')]) {
+    //                      sh "mvn clean package -Dmaven.test.skip=true"
+                      sh "mvn clean package -Dmaven.test.skip=true"
+                  }
+              } else {
+                echo 'No Maven Build'
               }
-          } else {
-            echo 'No Maven Build'
-          }
+            }
         }
     }
 }
