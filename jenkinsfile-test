@@ -11,13 +11,11 @@ properties ([
 	])
 ])
 
-
 podTemplate(label: label,
     containers: [
 		containerTemplate(name: 'maven', image: 'harbor.lab.pksdemo.net/library/maven:3.5.2-jdk-8-alpine', ttyEnabled: true, command: 'cat')
 	])
 {
-
     node(label) {
 
         date = new Date().format('yyyy-MM-dd')
@@ -31,10 +29,10 @@ podTemplate(label: label,
               if (MAVEN_BUILD == 'True') {
                       //sh "mvn clean package -DskipTests=true -Pdocker-icp"
                       sh "mvn clean package -Dmaven.test.skip=true"
+              }
             }
         }
     }
-  }
 }
 
 
