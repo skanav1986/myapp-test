@@ -1,17 +1,40 @@
+
 def label = "mypod-${UUID.randomUUID().toString()}"
 
-podTemplate(label: label, containers: [
-    containerTemplate(name: 'maven', image: 'harbor.lab.pksdemo.net/library/maven:3.5.2-jdk-8-alpine', ttyEnabled: true, command: 'cat')
-  ]) {
+properties ([
+	parameters ([
+		string(name: 'MAVEN_BUILD', defaultValue: 'True', description: 'MAVEN 빌드 여부 True/False', trim: true),
+		string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'BRANCH_NAME', trim: true),
+		string(name: 'GIT_URL'    , defaultValue: 'https://github.com/dbha/myapp-test', description: 'GIT_URL', trim: true),
+		string(name: 'GIT_ID'     , defaultValue: 'dbha', description: 'GIT_ID', trim: true)
+	])
+])
+
+
+podTemplate(label: label,
+    containers: [
+		containerTemplate(name: 'maven', image: 'harbor.lab.pksdemo.net/library/maven:3.5.2-jdk-8-alpine', ttyEnabled: true, command: 'cat')
+	])
+{
 
     node(label) {
-        stage('Get a Maven project') {
-            git 'https://github.com/jenkinsci/kubernetes-plugin.git'
+
+        date = new Date().format('yyyy-MM-dd')
+
+        stage ('checkout') {
+                git branch: "${BRANCH_NAME}", credentialsId: "${GIT_ID}", url: "${GIT_URL}"
+        }
+        stage('<DEV> Build') {
             container('maven') {
-                stage('Build a Maven project') {
-                    sh 'mvn -B clean install'
-                }
+
+              if (MAVEN_BUILD == 'True') {
+                      //sh "mvn clean package -DskipTests=true -Pdocker-icp"
+                      sh "mvn clean package -Dmaven.test.skip=true"
             }
         }
     }
+  }
 }
+
+
+
