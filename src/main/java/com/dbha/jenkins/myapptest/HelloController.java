@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @GetMapping
     public String hello() {
-        return "Spring Boot new deploy";
+        return "Spring Boot New Image Test!!";
     }
 }
