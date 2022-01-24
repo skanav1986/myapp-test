@@ -52,7 +52,7 @@ spec:
                     GIT_URL="https://github.com/dbha/myapp-test.git"
                     CLUSTER_BUILDER="default"
                     BRANCH_NAME="master"
-                    TAG="harbor.lab.pksdemo.net/tanzu/app/myapp-test"
+                    TAG="harbor.lab.pksdemo.net/tanzu/apps/myapp-test"
                 }
             }
         }       
@@ -78,6 +78,8 @@ spec:
                     sh '''#!/bin/sh -e
                         export GIT_COMMIT=$(cat app/git-commit.txt)
                         echo "${NAMESPACE}"
+                        echo "TAG=${TAG}"
+                        sleep 10000
                         kp image save -n "${NAMESPACE}" "${APP_NAME}" \
                             --git "${GIT_URL}" \
                             --cluster-builder "${CLUSTER_BUILDER}" \
