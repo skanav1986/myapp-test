@@ -36,18 +36,17 @@ spec:
 
     stages {
 
-        sh '''#!/bin/sh -e
-            export APP_NAME="myapp-test"
-            export NAMESPACE="myapp-test"
-            export GIT_URL="https://github.com/dbha/myapp-test.git"
-            export CLUSTER_BUILDER="default"
-            export BRANCH_NAME="master"
-            export TAG="harbor.lab.pksdemo.net/tanzu/app/${APP_NAME}"
-        '''
-
         stage('Fetch from GitHub') {
             steps {
                 dir("app"){
+                   sh '''#!/bin/sh -e
+                        export APP_NAME="myapp-test"
+                        export NAMESPACE="myapp-test"
+                        export GIT_URL="https://github.com/dbha/myapp-test.git"
+                        export CLUSTER_BUILDER="default"
+                        export BRANCH_NAME="master"
+                        export TAG="harbor.lab.pksdemo.net/tanzu/app/${APP_NAME}"
+                    '''
                     git(
                         poll: true,
                         changelog: true,
