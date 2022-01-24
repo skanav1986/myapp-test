@@ -77,11 +77,7 @@ spec:
                 container('k8s') {
                     sh '''#!/bin/sh -e
                         export GIT_COMMIT=$(cat app/git-commit.txt)
-                        echo "${NAMESPACE}"
-                        echo "${APP_NAME}"
-                        echo "${CLUSTER_BUILDER}"
-                        echo ${IMAGE_TAG}
-                        echo "${GIT_URL}"
+
                         kp image save -n "${NAMESPACE}" "${APP_NAME}" \
                             --git "${GIT_URL}" \
                             --cluster-builder "${CLUSTER_BUILDER}" \
