@@ -78,8 +78,14 @@ spec:
                     sh '''#!/bin/sh -e
                         export GIT_COMMIT=$(cat app/git-commit.txt)
 
-                        echo "${CLUSTER_BUILDER}"
-                        echo "${GIT_COMMIT}"
+                        echo "argument check"
+                        echo "CLUSTER_BUILDER:${CLUSTER_BUILDER}"
+                        echo "GIT_COMMIT:${GIT_COMMIT}"
+                        echo "NAMESPACE:${NAMESPACE}"
+                        echo "APP_NAME:${APP_NAME}"
+                        echo "GIT_URL:${GIT_URL}"
+                        echo "IMAGE_TAG:${IMAGE_TAG}"
+                        
                         sleep 10000
                         
                         kp image save -n "${NAMESPACE}" "${APP_NAME}" \
