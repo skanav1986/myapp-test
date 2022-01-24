@@ -52,7 +52,7 @@ spec:
                     GIT_URL="https://github.com/dbha/myapp-test.git"
                     CLUSTER_BUILDER="default"
                     BRANCH_NAME="master"
-                    IMAGE_TAG="harbor.lab.pksdemo.net/tanzu/apps/${APP_NAME}"
+                    IMAGE_TAG="harbor.lab.pksdemo.net/tanzu/apps/myapp-test"
                 }
             }
         }       
