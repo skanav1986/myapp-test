@@ -4,6 +4,7 @@ def GIT_URL
 def CLUSTER_BUILDER
 def BRANCH_NAME
 def TAG
+def credentialsId
 
 pipeline {
 
@@ -51,7 +52,8 @@ spec:
                     GIT_URL="https://github.com/dbha/myapp-test.git"
                     CLUSTER_BUILDER="default"
                     BRANCH_NAME="master"
-                    TAG="harbor.lab.pksdemo.net/tanzu/app/${APP_NAME}"
+                    TAG="harbor.lab.pksdemo.net/tanzu/app/myapp-test"
+                    credentialsId="git-jenkins"
                 }
             }
         }       
@@ -63,7 +65,7 @@ spec:
                         poll: true,
                         changelog: true,
                         branch: "${BRANCH_NAME}",
-                        credentialsId: "git-jenkins",
+                        credentialsId: "${credentialsId}",
                         url: "${GIT_URL}"
                     )
                     sh 'git rev-parse HEAD > git-commit.txt'
@@ -105,7 +107,7 @@ spec:
                     }
                     sshagent(credentials: ['jenkins-ssh-private-key']){
                         sh '''#!/bin/sh -e
-                        echo "this is sshagent"
+                        echo "sshagent"
                         kubectl get image "${APP_NAME}" -n "${NAMESPACE}" -o json | jq -r .status.latestImage >> version.txt
                         export CONTAINER_VERSION=$(cat version.txt)
                         kubectl get po -A
