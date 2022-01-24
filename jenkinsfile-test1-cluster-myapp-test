@@ -1,10 +1,14 @@
-def APP_NAME
-def NAMESPACE
-def GIT_URL
-def CLUSTER_BUILDER
-def BRANCH_NAME
-def IMAGE_TAG
-def credentialsId
+//Setting Parameter
+properties ([
+	parameters ([
+		string(name: 'APP_NAME', defaultValue: 'myapp-test', description: 'App Name', trim: true),
+		string(name: 'NAMESPACE', defaultValue: 'myapp-test', description: 'NS Name', trim: true),
+		string(name: 'GIT_URL', defaultValue: 'https://github.com/dbha/myapp-test.git', description: 'GIT URL', trim: true),
+		string(name: 'CLUSTER_BUILDER', defaultValue: 'my-java-clusterbuilder1', description: 'CLUSTER_BUILDER Name', trim: true),
+        string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'GIT BRANCH_NAME', trim: true),
+		string(name: 'IMAGE_TAG', defaultValue: 'harbor.lab.pksdemo.net/tanzu/apps/myapp-test', description: 'Image TAG', trim: true),
+	])
+])
 
 pipeline {
 
@@ -44,6 +48,7 @@ spec:
 
     stages {
 
+/*
         stage('Initialize the variables') {
             steps{
                 script{
@@ -56,7 +61,7 @@ spec:
                 }
             }
         }       
-
+*/
         stage('Fetch from GitHub') {
             steps {
                 dir("app"){
@@ -77,11 +82,12 @@ spec:
                 container('k8s') {
                     sh '''#!/bin/sh -e
                         export GIT_COMMIT=$(cat app/git-commit.txt)
+                        echo "kp image save....." 
 
                         kp image save -n "${NAMESPACE}" "${APP_NAME}" \
                             --git "${GIT_URL}" \
                             --cluster-builder "${CLUSTER_BUILDER}" \
-                            --tag "harbor.lab.pksdemo.net/tanzu/apps/myapp-test" \
+                            --tag "${IMAGE_TAG}" \
                             --env BP_GRADLE_BUILD_ARGUMENTS='--no-daemon build' \
                             --git-revision ${GIT_COMMIT} -w
                     '''
