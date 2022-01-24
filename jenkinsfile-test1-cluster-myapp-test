@@ -109,12 +109,12 @@ spec:
                         sh '''#!/bin/sh -e
                         echo "sshagent"
                         kubectl get image "${APP_NAME}" -n "${NAMESPACE}" -o json | jq -r .status.latestImage >> version.txt
-                        export CONTAINER_VERSION=$(cat version.txt)
+                        export VERSION=$(cat version.txt)
                         kubectl get po -A
                         pwd
                         cd gitops/app/"${NAMESPACE}"
                         pwd
-                        kustomize edit set image "${APP_NAME}"=${CONTAINER_VERSION}
+                        kustomize edit set image "${APP_NAME}"=${VERSION}
                         export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
                         git config --global user.name "dbha"
                         git config --global user.email "dbha0719@gmail.com"
