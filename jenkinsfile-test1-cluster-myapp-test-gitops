@@ -50,7 +50,7 @@ spec:
                     APP_NAME="myapp-test"
                     NAMESPACE="myapp-test"
                     GIT_URL="https://github.com/dbha/myapp-test.git"
-                    CLUSTER_BUILDER="default"
+                    CLUSTER_BUILDER="my-java-clusterbuilder1"
                     BRANCH_NAME="master"
                     IMAGE_TAG="harbor.lab.pksdemo.net/tanzu/apps/myapp-test"
                 }
@@ -78,6 +78,10 @@ spec:
                     sh '''#!/bin/sh -e
                         export GIT_COMMIT=$(cat app/git-commit.txt)
 
+                        echo "${CLUSTER_BUILDER}"
+                        echo "${GIT_COMMIT}"
+                        sleep 10000
+                        
                         kp image save -n "${NAMESPACE}" "${APP_NAME}" \
                             --git "${GIT_URL}" \
                             --cluster-builder "${CLUSTER_BUILDER}" \
