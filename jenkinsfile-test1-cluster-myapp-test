@@ -76,10 +76,11 @@ spec:
                 container('k8s') {
                     sh '''#!/bin/sh -e
                         export GIT_COMMIT=$(cat app/git-commit.txt)
-                        kp image save -n ${NAMESPACE} ${APP_NAME} \
-                            --git ${GIT_URL} \
-                            --cluster-builder ${CLUSTER_BUILDER} \
-                            --tag ${TAG} \
+                        echo "${NAMESPACE}"
+                        kp image save -n "${NAMESPACE}" "${APP_NAME}" \
+                            --git "${GIT_URL}" \
+                            --cluster-builder "${CLUSTER_BUILDER}" \
+                            --tag "${TAG}" \
                             --env BP_GRADLE_BUILD_ARGUMENTS='--no-daemon build' \
                             --git-revision ${GIT_COMMIT} -w
                     '''
