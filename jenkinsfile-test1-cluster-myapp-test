@@ -53,7 +53,6 @@ spec:
                     CLUSTER_BUILDER="default"
                     BRANCH_NAME="master"
                     TAG="harbor.lab.pksdemo.net/tanzu/app/myapp-test"
-                    credentialsId="git-jenkins"
                 }
             }
         }       
@@ -65,7 +64,7 @@ spec:
                         poll: true,
                         changelog: true,
                         branch: "${BRANCH_NAME}",
-                        credentialsId: "${credentialsId}",
+                        credentialsId: "git-jenkins",
                         url: "${GIT_URL}"
                     )
                     sh 'git rev-parse HEAD > git-commit.txt'
