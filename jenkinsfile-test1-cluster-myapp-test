@@ -36,6 +36,14 @@ spec:
 
     stages {
 
+        def APP_NAME = "myapp-test"
+        def NAMESPACE = "myapp-test"
+        def GIT_URL = "https://github.com/dbha/myapp-test.git"
+        def CLUSTER_BUILDER = "default"
+        def BRANCH_NAME = "master"
+        def TAG = "harbor.lab.pksdemo.net/tanzu/app/${APP_NAME}"
+
+
         stage('Fetch from GitHub') {
             steps {
                 dir("app"){
@@ -44,7 +52,7 @@ spec:
                         changelog: true,
                         branch: "${BRANCH_NAME}",
                         credentialsId: "git-jenkins",
-                        url: "${GIT_URL}/${APP_NAME}.git"
+                        url: "${GIT_URL}"
                     )
                     sh 'git rev-parse HEAD > git-commit.txt'
                 }
@@ -56,10 +64,10 @@ spec:
                 container('k8s') {
                     sh '''#!/bin/sh -e
                         export GIT_COMMIT=$(cat app/git-commit.txt)
-                        kp image save -n "${NAMESPACE}" "${APP_NAME}" \
-                            --git "https://github.com/dbha/${APP_NAME}.git" \
-                            --cluster-builder "${CLUSTER_BUILDER}" \
-                            --tag "harbor.lab.pksdemo.net/tanzu/app/${APP_NAME}" \
+                        kp image save -n ${NAMESPACE} ${APP_NAME} \
+                            --git ${GIT_URL} \
+                            --cluster-builder ${CLUSTER_BUILDER} \
+                            --tag ${TAG} \
                             --env BP_GRADLE_BUILD_ARGUMENTS='--no-daemon build' \
                             --git-revision ${GIT_COMMIT} -w
                     '''
