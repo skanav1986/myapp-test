@@ -1,12 +1,12 @@
 //Setting Parameter
 properties ([
 	parameters ([
-		string(name: 'APP_NAME', defaultValue: 'myapp-test', description: 'App Name', trim: true),
-		string(name: 'NAMESPACE', defaultValue: 'myapp-test', description: 'NS Name', trim: true),
-		string(name: 'GIT_URL', defaultValue: 'https://github.com/dbha/myapp-test.git', description: 'GIT URL', trim: true),
-		string(name: 'CLUSTER_BUILDER', defaultValue: 'my-java-clusterbuilder1', description: 'CLUSTER_BUILDER Name', trim: true),
-        string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'GIT BRANCH_NAME', trim: true),
-		string(name: 'IMAGE_TAG', defaultValue: 'harbor.lab.pksdemo.net/tanzu/apps/myapp-test', description: 'Image TAG', trim: true),
+		string(name: 'APP_NAME', defaultValue: 'myapp-test', description: '', trim: true),
+		string(name: 'NAMESPACE', defaultValue: 'myapp-test', description: '', trim: true),
+		string(name: 'GIT_URL', defaultValue: 'https://github.com/dbha/myapp-test.git', description: '', trim: true),
+		string(name: 'CLUSTER_BUILDER', defaultValue: 'my-java-clusterbuilder1', description: '', trim: true),
+        string(name: 'BRANCH_NAME', defaultValue: 'master', description: '', trim: true),
+		string(name: 'IMAGE_TAG', defaultValue: 'harbor.lab.pksdemo.net/tanzu/apps/myapp-test', description: '', trim: true),
 	])
 ])
 
