@@ -82,15 +82,16 @@ spec:
                     sh '''#!/bin/sh -e
                         export GIT_COMMIT=$(cat app/git-commit.txt)
                         echo "kp image save....."     
-                  
+                        
                         kp image save -n "${NAMESPACE}" "${APP_NAME}" \
                             --git "${GIT_URL}" \
                             --cluster-builder "${CLUSTER_BUILDER}" \
                             --tag "${IMAGE_TAG}" \
                             --env BP_GRADLE_BUILD_ARGUMENTS='--no-daemon build' \
                             --git-revision ${GIT_COMMIT} -w
-
+                    
                         kp image list -n "${NAMESPACE}"
+                        sleep 100000
                     '''
                 }
             }
