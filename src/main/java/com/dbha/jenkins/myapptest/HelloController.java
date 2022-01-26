@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @GetMapping
     public String hello() {
-        return "Spring Boot Test Dependency";
+        return "Spring Boot Test Dependency TEST";
     }
 }
