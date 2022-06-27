@@ -83,8 +83,8 @@ spec:
                     sh '''#!/bin/sh -e
                         #export GIT_COMMIT=$(cat app/git-commit.txt)
                         export GIT_COMMIT=master
-                        echo "kp image save....." 
-                        cat 
+                        echo "Start kp image save....." 
+                        sleep 10000000
 
                         kp image save "${APP_NAME}" \
                             --git "${GIT_URL}" \
