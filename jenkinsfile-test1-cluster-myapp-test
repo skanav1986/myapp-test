@@ -49,6 +49,7 @@ spec:
     stages {
 
 /*
+        
         stage('Initialize the variables') {
             steps{
                 script{
@@ -81,10 +82,12 @@ spec:
             steps {
                 container('k8s') {
                     sh '''#!/bin/sh -e
-                        #export GIT_COMMIT=$(cat app/git-commit.txt)
-                        export GIT_COMMIT=master
+                        export GIT_COMMIT=$(cat app/git-commit.txt)
                         echo "Start kp image save....." 
-                        sleep 10000000
+
+                        echo "${GIT_URL}" "${APP_NAME}"
+
+                        sleep 60
 
                         kp image save "${APP_NAME}" \
                             --git "${GIT_URL}" \
