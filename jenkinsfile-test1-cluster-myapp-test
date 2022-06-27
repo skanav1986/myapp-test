@@ -69,7 +69,7 @@ spec:
                         poll: true,
                         changelog: true,
                         branch: "${BRANCH_NAME}",
-                        credentialsId: "jenkins-kind",
+                        credentialsId: "git-jenkins",
                         url: "${GIT_URL}"
                     )
                     sh 'git rev-parse HEAD > git-commit.txt'
