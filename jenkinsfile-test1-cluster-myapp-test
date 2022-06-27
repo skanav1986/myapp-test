@@ -81,15 +81,16 @@ spec:
             steps {
                 container('k8s') {
                     sh '''#!/bin/sh -e
-                        export GIT_COMMIT=$(cat app/git-commit.txt)
+                        #export GIT_COMMIT=$(cat app/git-commit.txt)
+                        export GIT_COMMIT=master
                         echo "kp image save....." 
 
-                        kp image save -n "${NAMESPACE}" "${APP_NAME}" \
+                        kp image save "${APP_NAME}" \
                             --git "${GIT_URL}" \
                             --cluster-builder "${CLUSTER_BUILDER}" \
                             --tag "${IMAGE_TAG}" \
                             --env BP_GRADLE_BUILD_ARGUMENTS='--no-daemon build' \
-                            --git-revision ${GIT_COMMIT} -w
+                            --git-revision ${GIT_COMMIT} --sub-path ./ -n "${NAMESPACE}" -w
                     '''
                 }
             }
