@@ -84,6 +84,7 @@ spec:
                         #export GIT_COMMIT=$(cat app/git-commit.txt)
                         export GIT_COMMIT=master
                         echo "kp image save....." 
+                        cat 
 
                         kp image save "${APP_NAME}" \
                             --git "${GIT_URL}" \
