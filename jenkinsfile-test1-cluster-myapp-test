@@ -1,4 +1,3 @@
-//Setting Parameter
 properties ([
 	parameters ([
 		string(name: 'APP_NAME', defaultValue: 'myapp-test', description: '', trim: true),
@@ -25,9 +24,12 @@ metadata:
      app.kubernetes.io/version: "1"
 spec:
   volumes:
-  - name: secret-volume
+  - name: shared-kubeconfig-volume
     secret:
       secretName: shared-cluster-kubeconfig-secret
+  - name: dev-kubeconfig-volume
+    secret:
+      secretName: dev-cluster-kubeconfig-secret       
   containers:
   - name: k8s
     image: harbor.shared.lab.pksdemo.net/library/docker-build
@@ -35,11 +37,16 @@ spec:
     - sleep
     env:
       - name: KUBECONFIG
-        value: "/tmp/config/dev-cluster-kubeconfig-sa"
+        value: "/tmp/sharedConfig/shared-cluster-kubeconfig-sa"
+      - name: KUBECONFIG_DEV
+        value: "/tmp/devConfig/dev-cluster-kubeconfig-sa"
     volumeMounts:
-    - name: secret-volume
+    - name: shared-kubeconfig-volume
       readOnly: true
-      mountPath: "/tmp/config"
+      mountPath: "/tmp/sharedConfig"
+    - name: dev-kubeconfig-volume
+      readOnly: true
+      mountPath: "/tmp/devConfig"
     args:
     - infinity
 """
@@ -58,7 +65,7 @@ spec:
                     GIT_URL="https://github.com/dbha/myapp-test.git"
                     CLUSTER_BUILDER="default"
                     BRANCH_NAME="master"
-                    IMAGE_TAG="harbor.lab.pksdemo.net/tanzu/apps/myapp-test"
+                    IMAGE_TAG="harbor.shared.lab.pksdemo.net/tanzu/apps/myapp-test"
                 }
             }
         }       
@@ -84,11 +91,6 @@ spec:
                     sh '''#!/bin/sh -e
                         export GIT_COMMIT=$(cat app/git-commit.txt)
                         echo "Start kp image save....." 
-
-                        echo "${GIT_URL}" "${APP_NAME}"
-
-                        sleep 60
-
                         kp image save "${APP_NAME}" \
                             --git "${GIT_URL}" \
                             --cluster-builder "${CLUSTER_BUILDER}" \
@@ -124,10 +126,12 @@ spec:
                         pwd
                         cd gitops/app/"${NAMESPACE}"
                         pwd
+                        
                         kustomize edit set image "${APP_NAME}"=${VERSION}
                         export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
                         git config --global user.name "dbha"
                         git config --global user.email "dbha0719@gmail.com"
+                        git config --global --add safe.directory /home/jenkins/agent/workspace/myapp-test/gitops
                         git add .
                         mkdir -p ~/.ssh
                         git diff-index --quiet HEAD || git commit -m "Update by CI"
@@ -147,7 +151,8 @@ spec:
                   dir("gitops"){
                     sh '''#!/bin/sh -e
                     cd app
-                    kubectl apply -k ./"${APP_NAME}"
+                    export KUBECONFIG=/tmp/devConfig/dev-cluster-kubeconfig-sa
+                    kubectl apply -k ./"${APP_NAME}" -n "${NAMESPACE}"
                     '''
                   }
                 }
