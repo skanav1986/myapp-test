@@ -98,8 +98,7 @@ spec:
                             --env BP_GRADLE_BUILD_ARGUMENTS='--no-daemon build' \
                             --git-revision ${GIT_COMMIT} -w
                     
-                        kp image list -n "${NAMESPACE}"s
-                        sleep 1000
+                        kp image list -n "${NAMESPACE}"
                     '''
                 }
             }
