@@ -25,21 +25,29 @@ metadata:
      app.kubernetes.io/version: "1"
 spec:
   volumes:
-  - name: secret-volume
+  - name: shared-kubeconfig-volume
     secret:
-      secretName: test-cluster1-kubeconfig-secret
+      secretName: shared-cluster-kubeconfig-secret
+  - name: dev-kubeconfig-volume
+    secret:
+      secretName: dev-cluster-kubeconfig-secret       
   containers:
   - name: k8s
-    image: harbor.lab.pksdemo.net/library/docker-build
+    image: harbor.shared.lab.pksdemo.net/library/docker-build
     command:
     - sleep
     env:
       - name: KUBECONFIG
-        value: "/tmp/config/test-cluster1-kubeconfig-sa"
+        value: "/tmp/sharedConfig/shared-cluster-kubeconfig-sa"
+      - name: KUBECONFIG_DEV
+        value: "/tmp/devConfig/dev-cluster-kubeconfig-sa"
     volumeMounts:
-    - name: secret-volume
+    - name: shared-kubeconfig-volume
       readOnly: true
-      mountPath: "/tmp/config"
+      mountPath: "/tmp/sharedConfig"
+    - name: dev-kubeconfig-volume
+      readOnly: true
+      mountPath: "/tmp/devConfig"
     args:
     - infinity
 """
