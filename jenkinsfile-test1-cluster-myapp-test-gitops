@@ -132,6 +132,7 @@ spec:
                         export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
                         git config --global user.name "dbha"
                         git config --global user.email "dbha0719@gmail.com"
+                        git config --global --add safe.directory /home/jenkins/agent/workspace/myapp-test/gitops
                         git add .
                         mkdir -p ~/.ssh
                         git diff-index --quiet HEAD || git commit -m "Update by CI"
