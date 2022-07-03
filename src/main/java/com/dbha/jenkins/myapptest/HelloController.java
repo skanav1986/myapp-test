@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @GetMapping
     public String hello() {
-        return "Spring Boot TBS Test-0703";
+        return "Spring Boot TBS gitops";
     }
 }
