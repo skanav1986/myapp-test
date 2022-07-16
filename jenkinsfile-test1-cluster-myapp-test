@@ -124,7 +124,7 @@ spec:
                         export VERSION=$(cat version.txt)
                         kubectl get po -A
                         pwd
-                        cd gitops/app/"${NAMESPACE}"
+                        cd gitops/app/"${APP_NAME}"
                         pwd
                         
                         kustomize edit set image "${APP_NAME}"=${VERSION}
