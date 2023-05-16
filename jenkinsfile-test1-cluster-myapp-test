@@ -72,6 +72,7 @@ spec:
                     sh '''#!/bin/sh -e
                         export GIT_COMMIT=$(cat app/git-commit.txt)
                         echo "Start kp image save....." 
+			sleep 10000000
                         kp image save "${APP_NAME}" \
                             --git "${GIT_URL}" \
                             --cluster-builder "${CLUSTER_BUILDER}" \
