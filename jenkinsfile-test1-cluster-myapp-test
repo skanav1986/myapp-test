@@ -22,7 +22,6 @@ metadata:
      app.kubernetes.io/name: jenkins-build
      app.kubernetes.io/component: jenkins-build
      app.kubernetes.io/version: "1"
-  namespace: myapp-test
 spec:
   containers:
   - name: k8s
