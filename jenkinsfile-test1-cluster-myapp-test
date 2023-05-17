@@ -5,7 +5,7 @@ properties ([
 		string(name: 'GIT_URL', defaultValue: 'https://github.com/skanav1986/myapp-test.git', description: '', trim: true),
         string(name: 'CLUSTER_BUILDER', defaultValue: 'default', description: '', trim: true),
         string(name: 'BRANCH_NAME', defaultValue: 'master', description: '', trim: true),
-		string(name: 'IMAGE_TAG', defaultValue: 'harborfortbs.test.com/library/myapp-test', description: '', trim: true),
+		string(name: 'IMAGE_TAG', defaultValue: 'harborfortbs.test.com/tbs/myapp-test', description: '', trim: true),
 	])
 ])
 
@@ -49,7 +49,7 @@ spec:
                     GIT_URL="https://github.com/skanav1986/myapp-test.git"
                     CLUSTER_BUILDER="default"
                     BRANCH_NAME="master"
-                    IMAGE_TAG="harborfortbs.test.com/library/myapp-test"
+                    IMAGE_TAG="harborfortbs.test.com/tbs/myapp-test"
                 }
             }
         }       
