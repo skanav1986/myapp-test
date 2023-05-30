@@ -98,6 +98,7 @@ spec:
 			      --tag "${IMAGE_TAG}" \
 			      --env BP_GRADLE_BUILD_ARGUMENT='--no-daemon build' \
 			      --git-revision "${GIT_COMMIT}" --sub-path ./ -n "$NAMESPACE" -w
+		'''
 			      }
 			      }
 			      }
