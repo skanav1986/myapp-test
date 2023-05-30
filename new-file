@@ -5,8 +5,8 @@ properties ([
 		string(name: 'NAMESPACE', defaultValue: '', description: 'Enter the name to create a namespace', trim: true),
 		string(name: 'BRANCH_NAME', defaultValue: '', description: 'Input the branch name', trim: true), 
 		string(name: 'IMAGE_TAG', defaultValue: '', description: 'Input the tag value', trim: true),
-		string(name: 'APP_NAME', defaultValue: '', description: 'Input the app name to build', trim: true)
-		string(name: 'CLUSTER_BUILDER', defaultValue: '', description: 'Input the cluster builder name', trim: true)
+		string(name: 'APP_NAME', defaultValue: '', description: 'Input the app name to build', trim: true),
+		string(name: 'CLUSTER_BUILDER', defaultValue: '', description: 'Input the cluster builder name', trim: true),
 		string(name: 'GIT_URL', defaultValue: '', description: 'Input the GIT URL', trim: true)
 		
 	])
