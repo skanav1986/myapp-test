@@ -46,7 +46,7 @@ spec:
     stages {
         stage('Fetch from GitHub') {
             steps {
-                
+                dir("app") {
                     git(
                         poll: true,
                         changelog: true,
@@ -56,6 +56,7 @@ spec:
                     )
                 sh 'git rev-parse HEAD > git-commit.txt'
             }
+	    }
         }
 
         stage('Create Namespace') {
