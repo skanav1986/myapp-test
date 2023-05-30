@@ -84,7 +84,7 @@ spec:
                     '''
 		    }
 		 }
-	
+	}
 	stage('TBS image build') {
             steps {
                 container('k8s') {
